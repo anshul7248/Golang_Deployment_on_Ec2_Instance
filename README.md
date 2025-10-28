@@ -55,11 +55,12 @@ sudo apt install certbot python3-certbot-apache -y
 ```bash
 sudo vim /etc/apache2/sites-available/your_domain.conf
 ```
+```bash
 <VirtualHost *:80>
     ServerName your_domain
     ServerAlias www.your_domain
 </VirtualHost>
-
+```
 ```bash
 sudo a2ensite your-domain.conf
 sudo systemctl reload apache2
@@ -75,7 +76,7 @@ sudo certbot --apache
 ```bash
 sudo vim /etc/apache2/sites-available/your_domain-le-ssl.conf
 ```
-
+```bash
 <IfModule mod_ssl.c>
 <VirtualHost *:443>
     ServerName api.bizztale.info
@@ -105,6 +106,7 @@ sudo vim /etc/apache2/sites-available/your_domain-le-ssl.conf
     CustomLog ${APACHE_LOG_DIR}/api_access.log combined
 </VirtualHost>
 </IfModule>
+```
 
 ```bash
 sudo a2enmod proxy
@@ -128,6 +130,7 @@ cd /home/ubuntu/ratelimiter-api
 ```bash
 vim .env
 ```
+```bash
 DB_HOST=127.0.0.1
 DB_USER=postgres
 DB_PASSWORD=password
@@ -135,7 +138,7 @@ DB_NAME=db_name
 DB_PORT=5432
 DB_SSLMODE=disable
 DB_TIMEZONE=Asia/Kolkata
-
+```
 #### Now pull the build file on server
 ```bash
 sudo scp -i your.pem_file /path/to/buildfile ubuntu@your_domain:/home/ubuntu/ratelimiter-api
@@ -151,6 +154,8 @@ chmod +x buildfile_name
 ```bash
 sudo vim /etc/systemd/system/ratelimiter.service
 ```
+
+```bash
 [Unit]
 Description=My Golang App
 After=network.target
@@ -165,7 +170,7 @@ RestartSec=5
 
 [Install]
 WantedBy=multi-user.target
-
+```
 ```bash
 sudo systemctl daemon-reload
 sudo systemctl restart ratelimiter.service
