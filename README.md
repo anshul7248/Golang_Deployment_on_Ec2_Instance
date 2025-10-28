@@ -38,12 +38,14 @@ sudo systemctl restart postgresql
 ```
 
 ### Create Database
+```bash
 sudo -i -u postgres
 psql
 CREATE DATABASE testdb;
 ALTER ROLE postgres WITH PASSWORD '1234';
 \q
 exit
+```
 
 ## Step 2
 
