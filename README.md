@@ -25,14 +25,14 @@ sudo systemctl enable postgresql
 ```
 ```bash
 sudo vim /etc/postgresql/14/main/postgresql.conf
-```
+
 listen_addresses = '*'
 
-```bash
-sudo vim /etc/postgresql/14/main/pg_hba.conf
-```
-host    all             all             0.0.0.0/0               md5
 
+sudo vim /etc/postgresql/14/main/pg_hba.conf
+
+host    all             all             0.0.0.0/0               md5
+```
 ```bash
 sudo systemctl restart postgresql
 ```
@@ -183,13 +183,13 @@ sudo systemctl status ratelimiter.service
 sudo vim /etc/apache2/sites-available/your_domain-le-ssl.conf
 ```
 #### Uncomment the below lines
-
+```bash
 ProxyPreserveHost On
 ProxyPass /api/ http://127.0.0.1:8080/
 ProxyPassReverse /api/ http://127.0.0.1:8080/
 RequestHeader set X-Forwarded-Proto "https"
 RequestHeader set X-Forwarded-Port "443"
-
+```
 And run the below command after saving it 
 
 ```bash
