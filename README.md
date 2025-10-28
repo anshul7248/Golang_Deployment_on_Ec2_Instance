@@ -52,7 +52,7 @@ exit
 ```bash
 sudo apt install certbot python3-certbot-apache -y
 
-sudo vim /etc/apache2/sites-available/your_domain.conf
+sudo vim /etc/apache2/sites-available/your_domain.conf   (copy below data and paste it)
 
 <VirtualHost *:80>
     ServerName your_domain
@@ -71,7 +71,7 @@ sudo certbot --apache
 ## Step 3: Configure HTTP Virtual Host
 
 ```bash
-sudo vim /etc/apache2/sites-available/your_domain-le-ssl.conf
+sudo vim /etc/apache2/sites-available/your_domain-le-ssl.conf    (copy below data and paste it)
 
 <IfModule mod_ssl.c>
 <VirtualHost *:443>
@@ -130,7 +130,7 @@ DB_NAME=db_name
 DB_PORT=5432
 DB_SSLMODE=disable
 DB_TIMEZONE=Asia/Kolkata
-```
+
 #### Now pull the build file on server
 
 sudo scp -i your.pem_file /path/to/buildfile ubuntu@your_domain:/home/ubuntu/ratelimiter-api
@@ -144,7 +144,7 @@ chmod +x buildfile_name
 ## Step 5: Create a Systemd Service for the Go App
 
 ```bash
-sudo vim /etc/systemd/system/ratelimiter.service
+sudo vim /etc/systemd/system/ratelimiter.service     ( copy below data and paste it)
 
 [Unit]
 Description=My Golang App
@@ -168,6 +168,7 @@ sudo systemctl status ratelimiter.service
 ```
 
 ## Step 6: Enable Reverse Proxy
+
 ```bash
 sudo vim /etc/apache2/sites-available/your_domain-le-ssl.conf
 ```
@@ -178,9 +179,9 @@ ProxyPass /api/ http://127.0.0.1:8080/
 ProxyPassReverse /api/ http://127.0.0.1:8080/
 RequestHeader set X-Forwarded-Proto "https"
 RequestHeader set X-Forwarded-Port "443"
-
-And run the below command after saving it 
-
+```
+## And run the below command after saving it 
+```bash
 sudo a2enmod rewrite
 sudo a2enmod proxy
 sudo a2enmod proxy_http
